@@ -1,0 +1,46 @@
+html,
+body {
+  min-width: 1122px;
+  min-height: 1750px;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #000 url('../img/body-bg.jpg') no-repeat center top;
+  background-size: 1122px auto;
+}
+
+.clearfix::after {
+  content: "";
+
+  display: table;
+  clear:both;
+}
+
+.main-header {
+
+}
+
+.container {
+  width: 940px;
+  margin: 0 auto;
+  padding: 0 10;
+
+    /*оформление сетки*/
+    min-height: 70;
+}
+
+.main-navigation {
+  float:left;
+  width:780px;
+  /*оформление сетки*/
+  min-height:70px;
+}
+
+.user-block {
+  float: right;
+  width: 140px;
+  /*оформление сетки*/
+  min-height: 70px;
+}
