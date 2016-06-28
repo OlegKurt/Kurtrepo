@@ -1,0 +1,524 @@
+html,
+body {
+  /*выставляем минимальные значения для тела и всего хтмл*/
+  min-width: 960px;
+  min-height: 1750px;
+  margin: 0;
+  padding: 0;
+
+  /*3 Смотрим в макете, какой шрифт основной (преобладает) и вписываем его параметры*/
+  /*3 жирный шрифт, поэтому 700*/
+font-weight: 700;
+font-style: 14px;
+line-height: 24px;
+/*3 Как только в боди мы добавили черный цвет (темный фон), нужно сразу же добавить контрастный цвет шрифта*/
+color: #fff;
+/*3Правильно задавать сначала нестандартный, потом максимально стандартный, потом семейство шрифта*/
+font-family: "PT Sans Narrow", "Arial", sans-serif;/*3 нужно не забыть подключить в документ шрифты с гугла или из папки*/
+text-transform: uppercase;
+}
+
+/*вставляем фоновую картинку и выравниваем ее, для картинки обязательно вначале ставим преобладающий ее цвет*/
+body {
+  background: #000 url('../img/body-bg.jpg') no-repeat center top;
+  background-size: 1122px auto;
+}
+
+/*В hTML в div контейнера еще добавляем специальный класс clearfix, который добавляет нам распорку для внутренних блоков с флоутами (плавающие элементы друг друга видят, а окружающие их блоки флоутов не видят, поэтому):
+<div class="container clearfix">*/
+.clearfix::after {
+  content: "";
+  display: table;
+  clear:both;
+}
+
+/*т.к. контейнер прижался снизу к мэйнхэдеру, то добавляем маргин между мэйнхэдером и мейновским блоком.
+Для сеточных блоков вертикальные отступы задавать снизу, т.е. для .main-header margin-bottom: 60px;*/
+.main-header {
+margin-bottom: 60px;
+
+/*т.к. в хэдере есть ссылки, которые автоматом окрашиваются в синий (ссылки не наследуют цвет текста от родительского элемента), то обязательно дублируем цвет текста в этом элементе*/
+color: #fff;
+
+background-color: #000000;
+}
+
+/*Чтобы отцентровать центровщик (класс .container) нужно в стиль его добавить свойство margin: 0 auto; К тому же ставим ему фиксированную ширину, а внутренние блочные элементы контейнера тоже указываем с фиксированной шириной.*/
+.container {
+  width: 940px;
+  margin: 0 auto;
+  padding: 0 10;
+
+}
+
+/*...а внутренние блочные элементы контейнера тоже указываем с фиксированной шириной.*/
+.main-navigation {
+  float:left;
+  width:780px;
+  /*оформление сетки*/
+  min-height:70px;
+}
+
+/*3 т.к. список по умолчанию маркированный и с отступами, то удалим их*/
+.main-navigation ul {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+  /*3 чтобы убрать отступы между лишками, в родительском блоке ставим фонт-сайз 0, а в лишках - нужный размер:*/
+  font-size: 0;
+}
+
+/*3 лишки преобразовываем в блочно-строчные*/
+.main-navigation li {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 16px;
+  line-height: 20px;
+
+}
+
+/*3 еще раз дублируем цвет ссылок (пунктов меню) - т.е. добавляем к названию класса селектор "a" и убираем подчеркивание*/
+.main-navigation a {
+  color: #fff;
+  text-decoration: none;
+
+  /*3 задаем отступы между ссылками, поэтому они д.б. блочными. Внимание: расстояние между надписями в макете 40пкс, поэтому делаем паддинги по 20пкс в пунктах меню.*/
+  display: block;
+  padding: 25px 20px;
+}
+
+.main-navigation a:hover {
+  background: #242424;
+}
+
+
+/*...а внутренние блочные элементы контейнера тоже указываем с фиксированной шириной.*/
+.user-block {
+  float: right;
+  /*3 меняем width на max-width, чтобы блок строго описывал нашу ссылку*/
+  width: 140px;
+  /*оформление сетки*/
+  min-height: 70px;
+}
+
+  /*3 добавляем свойства ссылки "Вход"*/
+.login {
+/*3 прописываем релэйтив, чтобы иконку входа располагать от верхнего левого угла...01*/
+  position: relative;
+
+  display: inline-block;
+  padding: 25px 20px;
+  /*3 т.к. максимальный размер составляет 140 пкс, а до символа входа перед словом "Вход" 50 пкс, то */
+  padding-left: 50px;
+
+/*3 прописываем остальные свойства из мэйн навигэйшн, т.к. они одинаковые*/
+  font-size: 16px;
+  line-height: 20px;
+  vertical-align: top;
+  color: #ffffff;
+  text-decoration: none;
+  }
+
+  /*3 пишем после названия класса сразу псевдокласс (без а), т.к. название класса уже относится к ссылке*/
+  .login:hover {
+    background-color: #242424;
+  }
+
+  /*3 ...01 иконку добавляем через псевдоэлемент (он по умолчанию строчный, поэтому присваиваем ему абсолютную позицию, что автоматически делает его блочным)*/
+  .login::before {
+    content: "";
+    position: absolute;
+    top: 26px;
+    left: 16px;
+
+    width: 18px;
+    height: 17px;
+
+/*3 прописываем цвет фона (к примеру, красный, чтобы удобно было спозиционировать, впоследствии мы его удалили и написали transparent) и вставляем спрайт*/
+    background: transparent url("../img/sprites.png") no-repeat;
+/*3 позиционируем спрайт*/
+    background-position: -5px 0px;
+/*3 чтобы сделать этот псевдоэлемент по умолчанию темным, то его прозрачность ставим 30% (из макета)*/
+    opacity: 0.3;
+  }
+
+/*3 !!!РАЗОБРАТЬСЯ С ПСЕВДОКЛАССАМИ И ТЕГАМИ!!!чтобы при наведении символ снова был нормальной прозрачности*/
+  .login:hover::before {
+    opacity: 1;
+  }
+
+/*Для картинок можно и нужно задавать высоту (дублировать в хтмл и стилях, если это сущностный элемент)
+зацентровать индексную картинку: выставляем размеры картинки и центруем ее*/
+.index-logo {
+  width: 368px;
+  height: 204px;
+  /*3 по умолчанию рисунок является строчным элементом, поэтому по верхам ставим ноль, чтобы с дивом выравнить*/
+  margin: 0 auto;
+  /*задаем отступ снизу, т.е. сеточный блок отталкивает другие сеточные блоки вниз*/
+  margin-bottom: 25px;
+}
+
+/*3 Для картинки в качестве защиты от дурака записываем размеры*/
+.index-logo img {
+  width: 368px;
+  height: 204px;
+}
+
+/*чтобы контейнер с фичерс-айтэми не прилипал к нижнему блоку, добавляем отступ снизу*/
+.features {
+  margin-bottom: 80px;
+}
+
+/*блоки "быстро, хорошо, дорого всем выставляем приклейку к левой стороне...*/
+.features-item {
+  float: left;
+  width: 300px;
+  margin-right: 20px;
+  /*только для оформления сетки*/
+  min-height: 175px;
+
+  text-align: center;
+}
+
+/*...а т.к. последний прыгает на следующую строку из-за маржина, то его выставляем нулевым следующим образом*/
+.features-item:last-child {
+  margin-right: 0;
+}
+
+.features-name {
+  /*3 чтобы задать отступы, преобразим в блочный элемент. В паддинге у нас будет ромбик*/
+  display: block;
+  /*3чтобы спозиционировать абсолютные позиции внутри, ставим релэтив тегам b с классом фичерс нэйм*/
+  position: relative;
+  margin-bottom: 30px;
+  padding-bottom: 35px;
+
+  font-size: 30px;
+  line-height: 42px;
+}
+
+.features-item p {
+  margin: 10px;
+  margin-bottom: 0;
+}
+
+/*3 каждой подписи добавляем псевдоэлемент афтер*/
+.features-name::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  /*3 выравниваем по центру ...2*/
+  left: 50%;
+  display: block;
+  width: 20px;
+  height: 20px;
+  /*3...2 добавляем маржин, чтобы было точно по центру*/
+  margin: -10px;
+
+  background-color: #ffffff;
+  transform: rotate(45deg);
+}
+
+.index-content {
+  padding: 50px 80px;
+/*бежду дивами зададим расстояние*/
+  margin-bottom: 35px;
+
+  color: #000000;
+  /*добавляем разделитель как еще один фон с выравниванием. Указываем его обязательно перед большим фоном*/
+  background:
+  url("../img/separator-content.png") no-repeat center,
+  #f8f5f2 url("../img/bg-pattern-content.png");
+
+}
+
+/*т.к. далее в странице "контактная информация" шире 300пкс, то выставим ширину больше - пусть не будет единообразия*/
+.index-content-left {
+  float: left;
+  width: 380px;
+  /*только для оформления сетки*/
+  min-height: 330px;
+}
+
+.index-content-right {
+  float: right;
+  width: 300px;
+  /*только для оформления сетки*/
+  min-height: 330px;
+}
+
+.index-content-title {
+  margin: 0;
+  margin-bottom: 25px;
+
+  font-size: 30px;
+  line-height: 42px;
+}
+
+  /*3 отступы у всех абзацев*/
+.index-content p {
+  margin: 0;
+  margin-bottom: 25px;
+}
+
+.news-review {
+  margin: 0;
+  padding: 0;
+  padding-right: 35px;
+
+  list-style: none;
+}
+
+.news-review li {
+  margin-bottom: 25px;
+}
+
+/*т.к. обзацы тоже капризные и имеют свои собственные отступы, то нужно их однулить*/
+.news-review p {
+  margin-bottom: 0;
+}
+
+.news-review time {
+  text-transform: none;
+  font-weight: 400;
+}
+
+.btn {
+/*3 прописываем кнопкам инлайн блок, т.к. на макете есть кнопки, которые идут последовательно*/
+  display: inline-block;
+  padding: 10px 33px;
+/*3 один пробел между блочно-строчными элементами равен где-то 4-м пкс+ставим отступ 16пкс=20пкс*/
+  margin-right: 16px;
+
+  vertical-align: top;
+  text-align: center;
+
+/*3 текстовые параметры не наследуются кнопками, поэтому ВСЕ их нужно прописывать для них*/
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  font-family: "Pt Sans Narrow", "Arial", sans-serif;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  background-color: #000000;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn:hover,
+.btn:active {
+  background-color: #663d15;
+}
+
+.btn.disabled,
+.btn:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.btn.disabled:hover,
+.btn:disabled:hover {
+  background-color: #000000;
+}
+
+.gallery {
+  position: relative;
+
+  height: 260px;
+}
+
+/*3 т.к. у тега figure тоже есть свои отступы, то удалим их*/
+.gallery-content {
+  height: 164px;
+  margin: 0;
+/*3 серый фон, если картинка не прогрузится и добавляем рамку*/
+  background-color: #cccccc;
+  border: 7px solid #ffffff;
+}
+
+/*3 чтобы картинка не вылезала за рамки еще раз для нее правила*/
+.gallery-content img {
+  width: 286px;
+  height: 164px;
+}
+
+.gallery .btn {
+  position: absolute;
+  bottom: 0;
+
+/*3 чтобы одинаковы были (можно было флоутить, но было бы не очень хорошее решение)*/
+  width: 140px;
+  margin: 0;
+}
+
+.gallery-prev {
+  left: 0;
+}
+
+.gallery-next {
+  right: 0;
+}
+
+/*3 дублируем текстовые параметры формы
+font-size: 14px;
+line-height: 24px;
+font-family: "Pt Sans Narrow", "Arial", sans-serif;
+color: #000000;
+text-transform: uppercase;
+но лучше через ИНХЕРИТЫ, т.е.
+*/
+.appointment-form input {
+  font: inherit;
+  color: inherit;
+  text-transform: inherit;
+
+  width: 140px;
+  padding: 7px 15px;
+
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 20px;
+
+  background-color: #f9f6f3;
+  border: 2px solid #000000;
+  outline: none;
+
+}
+
+/*3 чтобы при наведении изменялся цвет рамки*/
+.appointment-form input:focus {
+  border: 2px solid #663d15;
+}
+
+/*3 у каждой второй кнопки убрать маржин*/
+.appointment-form input:nth-child(2n) {
+  margin-right: 0;
+}
+
+/*3 переопределяем .btn внутри .appointment-form*/
+.appointment-form .btn {
+  clear: both;
+  width: 100%;
+}
+
+.main-footer {
+  /*для футера как для самого нижнего элемента отступ ставим сверху*/
+  margin-top: 65px;
+  /*сожмем контейнер с тремя элементами сверху и снизу*/
+  padding-top: 60px;
+  padding-bottom: 40px;
+
+  /*3 цвет лучше явно везде прописать для футера*/
+  color: #ffffff;
+  background: #252525 url("../img/bg-pattern-footer.png");
+}
+
+.footer-contact {
+  float: left;
+  width: 320px;
+  /*только для оформления сетки*/
+  margin-right: 60px;
+  /*только для оформления сетки*/
+  min-height: 90px;
+}
+
+.footer-contact a {
+  color: #ffffff;
+}
+
+.footer-contact a:hover {
+  text-decoration: none;
+}
+
+.footer-social {
+  float: left;
+  width: 180px;
+  /*только для оформления сетки*/
+  min-height: 90px;
+  /*3 выравниваем кнопки по центру*/
+  text-align: center;
+}
+
+.footer-social p {
+  margin: 0;
+  margin-bottom: 15px;
+}
+
+/*оформляем кнопки*/
+.social-btn {
+  display: inline-block;
+  width: 43px;
+  height: 43px;
+  margin: 0 2px;
+  vertical-align: top;
+/*прячем текст*/
+  font-size: 0;
+  text-decoration: none;
+
+  background: #000000 url("../img/sprites.png") no-repeat center;
+
+/*добавляем интересный эффект при наведении на ярлычки*/
+  transition:
+  background-position 0.5s,
+  background-color 0.5s;
+}
+
+.social-btn:hover {
+  background: #ffffff url("../img/sprites.png") no-repeat center;
+}
+
+
+.social-btn-vk {
+  background-position: 7 -38;
+}
+
+.social-btn-fb {
+  background-position: 7 -85;
+}
+
+.social-btn-inst {
+  background-position: 9 -137;
+}
+
+.social-btn-vk:hover {
+  background-position: -45 -38;
+}
+
+.social-btn-fb:hover {
+  background-position: -45 -85;
+}
+
+.social-btn-inst:hover {
+  background-position: -45 -137;
+}
+
+.footer-copyright {
+  float: right;
+  /*3 заменяем ширину на максимальную, чтобы контент весь к правой стороне прижимал*/
+  max-width: 140px;
+  /*только для оформления сетки*/
+  min-height: 90px;
+}
+
+.footer-copyright p {
+  margin: 0;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+
+/*3 т.к. мы до этого выставили для .btn 16 пкс, то убираем их здесь*/
+.footer-copyright .btn {
+  margin-right: 0;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.footer-copyright .btn:hover {
+  color: #000000;
+  background-color: #ffffff;
+}
